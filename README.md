@@ -34,12 +34,20 @@ classes.`
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/6.png)  
 
 ### Function Realization  
-#### Add Student
->①run the 'default.aspx' file
+#### Add student and Delete student
+>①`Run the 'default.aspx' file`
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/7.png)  
 
->②
->③
->④
->⑤
+>②`Enter the name of the added student number and click Add`,and you can see the student is be added.
+
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/8.png)  
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/9.png)  
+
+>③`Click Delete`,and you can see the student is be deleted.
+
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/10.png)  
+
+#### Update the student
+>①``
+>②``
