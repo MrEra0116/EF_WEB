@@ -19,14 +19,6 @@ classes.`
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/4.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/5.png) 
 
-## Program Composition  
-#### Frame Composition  
->①`ControllerLayer`  
->②`ModelLayer`  
->③`DataAccess` 
-#### Database Framework  
->`Entity Framework`
-
 ## Use steps
 ### Warning
 >`Note that webform1.aspx is used to test and debug all functions, please do not run it, otherwise it will be used to cover the existing database data.`  
@@ -98,4 +90,340 @@ classes.`
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/25.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/26.png)  
 
+## Program Composition  
+#### Frame Composition  
+>①`ControllerLayer`  
 
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/27.png)  
+
+BLL.cs  Code:
+```using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace WEBEF
+{
+
+    public static class BLL<T> where T : class, new()
+    {
+        private static IDAL<T> dal = new DAL<T>();
+
+        /// <summary>
+        /// add
+        /// </summary>
+        /// <param name="model"></param>
+        public static int Add(T model)
+        {
+            return dal.Add(model);
+        }
+
+        /// <summary>
+        /// delete
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        public static int Delete(Expression<Func<T, bool>> whereLambda)
+        {
+            return dal.Delete(whereLambda);
+        }
+
+        /// <summary>
+        /// update
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <param name="propertyNames"></param>
+        /// <param name="perpertyValues"></param>
+        /// <returns></returns>
+        public static int Update(Expression<Func<T, bool>> whereLambda, string[] propertyNames, object[] perpertyValues)
+        {
+            return dal.Update(whereLambda, propertyNames, perpertyValues);
+        }
+
+        /// <summary>
+        /// select
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        public static List<T> GetModelList(Expression<Func<T, bool>> whereLambda)
+        {
+            return dal.GetModelList(whereLambda);
+        }
+    }
+}
+```
+>②`ModelLayer`  
+
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/28.png)  
+
+dbModel1.cs Code:
+```
+
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+namespace WEBEF
+{
+    public partial class dbModel1 : DbContext
+    {
+        public dbModel1()
+            : base("name=dbModel1")
+        {
+        }
+
+        public virtual DbSet<Classes> Classes { get; set; }
+        public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Study> Study { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasOptional(e => e.Study)
+                .WithRequired(e => e.Student)
+                .WillCascadeOnDelete();
+        }
+    }
+}
+```
+
+Student.cs  Code:
+``` using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+namespace WEBEF
+{
+    [Table("Student")]
+    public partial class Student
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Sno { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Name { get; set; }
+
+        public virtual Study Study { get; set; }
+    }
+}
+```
+
+Classes.cs  Code:
+``` using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+namespace WEBEF
+{
+    public partial class Classes
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Classes()
+        {
+            Study = new HashSet<Study>();
+        }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Cno { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string CName { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Study> Study { get; set; }
+    }
+}
+```
+
+Study.cs  Code:
+``` using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+namespace WEBEF
+{
+    [Table("Study")]
+    public partial class Study
+    {
+        public int Cno { get; set; }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Sno { get; set; }
+
+
+        public virtual Classes Classes { get; set; }
+
+        public virtual Student Student { get; set; }
+    }
+}
+```
+>③`DataAccess` 
+
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/29.png)  
+
+DAL.cs  Code:
+```using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+namespace WEBEF
+{
+    public class DBServices
+    {
+
+        public static dbModel1 db = new dbModel1();
+    }
+    public class DAL<T> :  IDAL<T> where T : class, new()
+    {
+        /// <summary>
+        /// 增
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int Add(T model)
+        {
+            DBServices.db.Set<T>().Add(model);
+            return DBServices.db.SaveChanges();
+        }
+
+        /// <summary>
+        /// 删
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        public int Delete(Expression<Func<T, bool>> whereLambda)
+        {
+            
+                var dbQuery =DBServices.db.Set<T>();
+
+                //先查询 对应表的 集合
+                var list = dbQuery.Where(whereLambda).ToList();
+
+                //遍历集合 里要删除的元素
+                foreach (var item in list)
+                {
+                    //标记为 删除状态
+                    dbQuery.Remove(item);
+                }
+                return DBServices.db.SaveChanges();
+            
+        }
+
+        /// <summary>
+        /// 改
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <param name="propertyNames"></param>
+        /// <param name="perpertyValues"></param>
+        /// <returns></returns>
+        public int Update(Expression<Func<T, bool>> whereLambda, string[] propertyNames, object[] perpertyValues)
+        {
+          
+
+                //1、查询要修改的对象集合
+                var list =DBServices.db.Set<T>().Where<T>(whereLambda).ToList();
+
+                //2、获取要修改的对象的类型
+                Type t = typeof(T);
+
+                //3、循环要修改的实体对象，并根据要修改的属性名修改对象对应的属性值
+                foreach (var item in list)
+                {
+                    //循环 要修改的属性 名称， 并 反射取出 t 中的 属性对象
+                    for (int index = 0; index < propertyNames.Length; index++)
+                    {
+                        //获取要修改的属性名
+                        string pName = propertyNames[index];
+
+                        //获取属性对象
+                        PropertyInfo pi = t.GetProperty(pName);
+
+                        //调用属性对象的 SetValue方法 为当前循环的 item对象 对应的属性赋值
+                        pi.SetValue(item, perpertyValues[index], null);
+                    }
+                }
+                return DBServices.db.SaveChanges();
+            
+        }
+
+        /// <summary>
+        /// 查
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        public List<T> GetModelList(Expression<Func<T, bool>> whereLambda)
+        {
+          
+                return DBServices.db.Set<T>().Where(whereLambda).ToList();
+            
+        }
+    }
+}
+```
+
+IDAL.cs  Code:
+```using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WEBEF
+{
+    public interface IDAL<T> where T : class, new()
+    {
+        /// <summary>
+        /// 增
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        int Add(T model);
+
+        /// <summary>
+        /// 删
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        int Delete(Expression<Func<T, bool>> whereLambda);
+
+        /// <summary>
+        /// 改
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <param name="propertyNames"></param>
+        /// <param name="perpertyValues"></param>
+        /// <returns></returns>
+        int Update(Expression<Func<T, bool>> whereLambda, string[] propertyNames, object[] perpertyValues);
+
+        /// <summary>
+        /// 查
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        List<T> GetModelList(Expression<Func<T, bool>> whereLambda);
+    }
+}
+```
+#### Database Framework  
+>`Entity Framework`
+
+### Our team
+>
+>
+>
+>
+>
