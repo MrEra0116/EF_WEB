@@ -422,8 +422,8 @@ namespace WEBEF
 >`Entity Framework`
 
 ### 6.Our team
->KANG Xingkai
->LIU Jiyuan
->ZUO Yilin
->ZHOU Yuxuan
->CHENG Ruoyi
+>KANG Xingkai  
+>LIU Jiyuan  
+>ZUO Yilin  
+>ZHOU Yuxuan  
+>CHENG Ruoyi  
