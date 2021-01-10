@@ -11,6 +11,10 @@ classes.`
 >①`Install visual studio 2019`,the download address is:https://visualstudio.microsoft.com/zh-hans/vs/  
 >②Use the system's own decompression software or third-party decompression software similar to band zip to `unzip the package containing the program we uploaded.`
 
-
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/2.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/3.png)
+
+>③`Open EF_ WEB.sln file in vs2019`  
+
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/4.png)  
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/5.png)  
