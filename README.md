@@ -14,7 +14,25 @@ classes.`
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/2.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/3.png)
 
->③`Open EF_ WEB.sln file in vs2019`  
+>①`Open EF_ WEB.sln file in vs2019`  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/4.png)  
->![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/5.png)  
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/5.png) 
+
+## Program Composition  
+#### Frame Composition  
+>①`ControllerLayer`  
+>②`ModelLayer`  
+>③`DataAccess` 
+#### Database Framework  
+>`Entity Framework`
+
+## Use steps
+### Warning
+>`Note that webform1.aspx is used to test and debug all functions, please do not run it, otherwise it will be used to cover the existing database data.`  
+### steps  
+>①
+>②
+>③
+>④
+>⑤
