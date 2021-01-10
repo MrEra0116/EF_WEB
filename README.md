@@ -26,7 +26,7 @@ classes.`
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/6.png)  
 
 ### Function Realization  
-#### 4.1Add and Delete student
+#### 4.1 Add and Delete student
 >①`Run the 'default.aspx' file`,all the following functions are implemented on the basis of executing this file.  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/7.png)  
@@ -40,19 +40,19 @@ classes.`
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/10.png)  
 
-#### 4.2Update the student
+#### 4.2 Update the student
 >①`Input the student number of a student in the database, input the corrected name, and click Update`,you can see the student is updated.  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/11.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/12.png)  
 
-#### 4.3Select the student
+#### 4.3 Select the student
 >①`Enter the student number of a student in the database and click Select`,you can see the selected student.  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/13.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/14.png)  
 
-#### 4.4Add class and Delete class
+#### 4.4 Add class and Delete class
 >①`Enter the name of the added class number and click Add`,and you can see the class is be added.  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/15.png)  
@@ -62,19 +62,19 @@ classes.`
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/17.png)  
 
-#### 4.5Update the class
+#### 4.5 Update the class
 >①`Input the class number of a class in the database, input the corrected name, and click Update`,you can see the class is updated.  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/18.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/19.png)  
 
-#### 4.6Select the class
+#### 4.6 Select the class
 >①`Enter the class number of a class in the database and click Select`,you can see the selected class.  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/20.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/21.png)  
 
-#### 4.7Add student to the class and Delete student from the class
+#### 4.7 Add student to the class and Delete student from the class
 >①`Input the existing student number and class number in the database and click Add`,and you can see the student is added to the class you input.  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/22.png)  
@@ -84,15 +84,15 @@ classes.`
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/24.png)  
 
-#### 4.8Select all information of a student according to the student number
+#### 4.8 Select all information of a student according to the student number
 >①`Input the student's number,and click the select`,and you can see all the student's information.
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/25.png)  
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/26.png)  
 
 ## 5.Program Composition  
-### 5.1Frame Composition  
-#### 5.1.1ControllerLayer  
+### 5.1 Frame Composition  
+#### 5.1.1 ControllerLayer  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/27.png)  
 
@@ -154,7 +154,7 @@ namespace WEBEF
     }
 }
 ```
-#### 5.1.2ModelLayer  
+#### 5.1.2 ModelLayer  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/28.png)  
 
@@ -267,7 +267,7 @@ namespace WEBEF
     }
 }
 ```
-#### 5.1.3DataAccess  
+#### 5.1.3 DataAccess  
 
 >![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/29.png)  
 
@@ -418,7 +418,7 @@ namespace WEBEF
     }
 }
 ```
-#### 5.2Database Framework  
+#### 5.2 Database Framework  
 >`Entity Framework`
 
 ### 6.Our team
