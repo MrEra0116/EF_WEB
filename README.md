@@ -31,13 +31,13 @@ classes.`
 ### Warning
 >`Note that webform1.aspx is used to test and debug all functions, please do not run it, otherwise it will be used to cover the existing database data.`  
 
->![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/6.png) 
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/6.png)  
 
 ### Function Realization  
 #### Add Student
 >①run the 'default.aspx' file
 
->![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/7.png) 
+>![image](https://github.com/MrEra0116/EF_WEB/blob/main/images/7.png)  
 
 >②
 >③
